@@ -1,0 +1,8 @@
+export class CreateStudentDto {
+  readonly name: string
+  readonly parentName: string
+  readonly age: number
+  readonly rate: number
+  readonly active: boolean
+  readonly class: number
+}

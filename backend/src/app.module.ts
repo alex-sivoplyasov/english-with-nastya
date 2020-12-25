@@ -4,11 +4,13 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 // import { StudentsController } from './students/students.controller';
 import { StudentsModule } from './students/students.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
     StudentsModule,
-    MongooseModule.forRoot(`mongodb+srv://admin:Maurozarate10@cluster0.rninu.mongodb.net/application?retryWrites=true&w=majority`)
+    MongooseModule.forRoot(`mongodb+srv://admin:Maurozarate10@cluster0.rninu.mongodb.net/application?retryWrites=true&w=majority`),
+    UsersModule
   ],
   controllers: [AppController],
   providers: [AppService],

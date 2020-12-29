@@ -5,4 +5,5 @@ export class UpdateStudentDto {
   readonly rate: number
   readonly active: boolean
   readonly class: number
+  readonly image: string
 }

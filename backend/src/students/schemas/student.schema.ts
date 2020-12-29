@@ -22,6 +22,9 @@ export class Student {
 
   @Prop()
   class: number
+
+  @Prop()
+  image: string
 }
 
 export const StudentSchema = SchemaFactory.createForClass(Student)

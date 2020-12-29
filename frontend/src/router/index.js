@@ -25,6 +25,24 @@ const routes = [
       auth: true
     },
     component: () => import( '../components/StudentsCreate.vue')
+  },
+  {
+    path: '/lessons',
+    name: 'Lessons',
+    meta: {
+      layout: 'main',
+      auth: true
+    },
+    component: () => import( '../views/Lessons.vue')
+  },
+  {
+    path: '/create-lesson',
+    name: 'CreateLesson',
+    meta: {
+      layout: 'main',
+      auth: true
+    },
+    component: () => import( '../components/LessonsCreate.vue')
   }
 ]
 
@@ -35,9 +53,6 @@ const router = createRouter({
 
 
 router.beforeEach( (to, from, next) => {
-  console.log('to', to.path)
-  console.log('from', from.path)
-  // console.log('next', next)
   next()
 })
 

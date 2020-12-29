@@ -1,10 +1,11 @@
 <template>
   <div id="nav">
     <div class="logo">
-      <div class="logo-title">Nastya App</div>
+      <div class="logo-title"> App</div>
     </div>
     <router-link to="/">Home</router-link> |
     <router-link to="/students">Students</router-link>
+    <router-link to="/lessons">Schedule</router-link>
   </div>
   <router-view/>
 </template>

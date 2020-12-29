@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import students from "./students";
+import lessons from "./lessons";
 import axios from "axios"
 import {server} from "../../utils/constants";
 
@@ -23,6 +24,6 @@ export default createStore({
     }
   },
   modules: {
-    students
+    students, lessons
   }
 })

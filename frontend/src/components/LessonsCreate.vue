@@ -6,10 +6,10 @@
       <select v-model="student" @change="studentSelect">
         <option v-for="student in students" :key="student.id" :value="student._id"> {{student.name}}</option>
       </select>
-      <input type="text">
       <input type="text" v-model="price">
       <input type="text" v-model="date">
       <input type="text" v-model="time">
+      <input type="text" v-model="duration">
       <button type="submit">Go</button>
     </form>
   </div>
@@ -23,7 +23,8 @@
       students: null,
       price: null,
       date: null,
-      time: null
+      time: null,
+      duration: null
     }),
     async mounted() {
       try {
@@ -39,8 +40,20 @@
       }
     },
     methods: {
-      formSubmit() {
-        // console.log(this.student)
+      async formSubmit() {
+        try {
+          await this.$store.dispatch('createLesson', {
+            studentId: this.student,
+            date: this.date,
+            time: this.time,
+            duration: this.duration,
+            price: this.price,
+            status: 'new'
+          })
+        } catch (e) {
+          console.log(e)
+        }
+
       },
       studentSelect() {
         // console.log(this.stu)

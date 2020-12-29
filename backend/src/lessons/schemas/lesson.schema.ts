@@ -6,25 +6,23 @@ export type LessonDocument = Lesson & Document
 @Schema()
 export class Lesson {
   @Prop()
-  name: string
+  studentId: string
 
   @Prop()
-  parentName: string
+  date: string
 
   @Prop()
-  age: number
+  time: string
 
   @Prop()
-  rate: number
+  duration: number
 
   @Prop()
-  active: boolean
+  price: number
 
   @Prop()
-  class: number
+  status: string
 
-  @Prop()
-  image: string
 }
 
 export const LessonSchema = SchemaFactory.createForClass(Lesson)

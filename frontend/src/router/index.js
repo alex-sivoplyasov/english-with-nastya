@@ -18,6 +18,24 @@ const routes = [
     component: () => import( '../views/Students.vue')
   },
   {
+    path: '/statistic',
+    name: 'Statistic',
+    meta: {
+      layout: 'main',
+      auth: true
+    },
+    component: () => import( '../views/Statistic.vue')
+  },
+  {
+    path: '/students/:id',
+    name: 'Student',
+    meta: {
+      layout: 'main',
+      auth: true
+    },
+    component: () => import( '../components/Student.vue')
+  },
+  {
     path: '/create-student',
     name: 'CreateStudent',
     meta: {
@@ -26,6 +44,15 @@ const routes = [
     },
     component: () => import( '../components/StudentsCreate.vue')
   },
+  // {
+  //   path: '/create-student',
+  //   name: 'CreateStudent',
+  //   meta: {
+  //     layout: 'main',
+  //     auth: true
+  //   },
+  //   component: () => import( '../components/StudentsCreate.vue')
+  // },
   {
     path: '/lessons',
     name: 'Lessons',

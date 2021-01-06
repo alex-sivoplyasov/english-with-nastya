@@ -2,8 +2,11 @@ import  { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+// import Vuelidate from 'vuelidate'
+import { VuelidatePlugin } from '@vuelidate/core'
+// import VueCompositionApi from '@vue/composition-api';
 
-import Test from "./components/Test";
+// Vue.use(Vuelidate)
 
 // import VCalendar from 'v-calendar'
 // import DatePicker from 'v-calendar/lib/components/date-picker.umd'
@@ -14,5 +17,6 @@ import Test from "./components/Test";
 createApp(App)
   .use(store)
   .use(router)
-  .component('Test', Test)
+  .use(VuelidatePlugin)
+  // .use(VueCompositionApi)
   .mount('#app')

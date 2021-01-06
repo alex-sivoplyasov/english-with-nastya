@@ -1,7 +1,7 @@
 <template>
   <div class="students" >
     <div class="students__list" v-if="students">
-      <div class="students__item" v-for="student in students" :key="student.id">
+      <router-link tag="div" :to="`/students/${student._id}`" class="students__item" v-for="student in students" :key="student.id">
         <div class="students__name">
           <div class="students__name-label">Имя: </div>
           <div class="students__name-value">{{student.name}}</div>
@@ -20,7 +20,7 @@
           <div class="students__rate-label">Ставка в час: </div>
           <div class="students__rate-value"> {{ student.rate}}</div>
         </div>
-      </div>
+      </router-link>
     </div>
     <div v-else>Загрузка...</div>
 

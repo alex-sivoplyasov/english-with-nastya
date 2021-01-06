@@ -18,6 +18,15 @@ export default {
         commit('setError', e)
         throw e
       }
+    },
+    async getStudent({commit}, id) {
+      try {
+        return (await axios.get(`${server}/students/${id}`)).data
+      } catch (e) {
+        commit('setError', e)
+        throw e
+      }
+
     }
   }
 }

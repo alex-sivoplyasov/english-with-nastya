@@ -10,6 +10,14 @@ export default {
         commit('setError', e)
         throw e
       }
+    },
+    async getLessons({commit}) {
+      try {
+        return (await axios.get(`${server}/lessons/`)).data
+      } catch (e) {
+        commit('setError', e)
+        throw e
+      }
     }
   }
 }

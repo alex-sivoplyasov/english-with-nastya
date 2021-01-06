@@ -4,8 +4,9 @@
       <div class="logo-title"> App</div>
     </div>
     <router-link to="/">Home</router-link> |
-    <router-link to="/students">Students</router-link>
-    <router-link to="/lessons">Schedule</router-link>
+    <router-link to="/students">Students</router-link> |
+    <router-link to="/lessons">Schedule</router-link> |
+    <router-link to="/statistic">Statistic</router-link>
   </div>
   <router-view/>
 </template>

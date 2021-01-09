@@ -1,49 +1,44 @@
 <template>
-  <div id="nav">
-    <div class="logo">
-      <div class="logo-title"> App</div>
-    </div>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/students">Students</router-link> |
-    <router-link to="/lessons">Schedule</router-link> |
-    <router-link to="/statistic">Statistic</router-link>
+  <Navbar/>
+  <div class="right">
+    <Header/>
+    <main class="content">
+      <router-view/>
+    </main>
   </div>
-  <router-view/>
+
 </template>
 
+<script>
+import Navbar from "./components/Navbar"
+import Header from "./components/Header";
+export default {
+  name: "App",
+  components: {
+    Navbar, Header
+  }
+}
+</script>
+
 <style>
-  @import "assets/index.scss";
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-  /*@import '~normalize.css';*/
-  /*@import 'normalize.css';*/
-  #nav {
-    display: flex;
-    /*justify-content: center;*/
-    align-items: center;
-    height: 64px;
-  }
+@import "assets/index.scss";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+/*@import '~normalize.css';*/
+/*@import 'normalize.css';*/
 
-  .logo {
-    flex: 1;
-  }
+#app {
+  display: flex;
+}
 
-  .button {
-    display: flex;
-    width: fit-content;
-    margin-top: 24px;
-    padding: 16px 32px;
-    text-decoration: none;
-    font-size: 16px;
-    text-transform: uppercase;
-    font-weight: 600;
-    border-radius: 40px;
-    background: #EBF5F7;
-    color: #008DEE;
-  }
+.content {
+  height: calc(100vh - 108px);
+  overflow-y: scroll;
+  background: #F4F7F0;
+  padding: 24px;
+}
 
-  .button:hover {
-    background: #008DEE;
-    color: #0D61AA;
-  }
+.right {
+  width: 100%;
+}
 
 </style>

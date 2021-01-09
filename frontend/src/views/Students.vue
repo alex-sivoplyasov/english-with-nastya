@@ -1,5 +1,16 @@
 <template>
   <div class="students" >
+    <div class="students__categories">
+      <div
+          class="students__category"
+          :class="category.active ? 'active' : ''"
+          v-for="category in categories" :key="category.name"
+          @click="changeCategory(category.name)"
+      >
+        {{category.name}}
+      </div>
+    </div>
+
     <div class="students__list" v-if="students">
       <router-link tag="div" :to="`/students/${student._id}`" class="students__item" v-for="student in students" :key="student.id">
         <div class="students__name">
@@ -34,17 +45,48 @@
   export default {
     name: "Students",
     data: () => ({
-      students: null
+      students: null,
+      categories: [
+        {name: 'Активные', active: true},
+        {name: 'Старые', active: false},
+        {name: 'Все', active: false}
+      ]
     }),
     async mounted() {
       this.students = await this.$store.dispatch('getStudents')
       console.log(this.students)
+    },
+    methods: {
+      changeCategory(categoryName) {
+        this.categories.find( cat => cat.active === true).active = false
+        this.categories.find( cat => cat.name === categoryName).active = true
+      }
     }
   }
 </script>
 
 <style scoped lang="scss">
   .students {
+    &__categories {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &__category {
+      width: 27%;
+      background: #FFFFFF;
+      padding: 24px;
+      margin-bottom: 32px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    &__category.active {
+      background: #85FFA5;
+    }
+
     &__list {
       display: flex;
       flex-wrap: wrap;
@@ -52,25 +94,10 @@
 
     &__item {
       width: 100%;
-      margin-bottom: 16px;
-      padding: 24px;
-      border: 1px solid #B7F5F2;
-      border-radius: 4px;
-      cursor: pointer;
+      background: #FFFFFF;
+      padding: 16px;
+      margin-bottom: 8px;
+      border-radius: 8px;
     }
-
-    &__item:hover {
-      border: 1px solid #B7F5F2;
-      box-shadow: 0px 8px 10px rgba(0, 141, 238, 0.4);
-    }
-
-    &__name, &__age, &__rate {
-      display: flex;
-    }
-
-    &__name-label, &__age-label, &__rate-label {
-      margin-right: 8px;
-    }
-
   }
 </style>

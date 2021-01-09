@@ -6,11 +6,15 @@ import {server} from "../../utils/constants";
 
 export default createStore({
   state: {
+    info: null,
     error: null
   },
   mutations: {
     setError(state, error) {
       state.error = error
+    },
+    setInfo(state, info) {
+      state.info = info
     }
   },
   actions: {
@@ -21,7 +25,16 @@ export default createStore({
         commit('setError', e)
         throw e
       }
+    },
+    setTitle({commit}, title) {
+      const info = {
+        title
+      }
+      commit('setInfo', info)
     }
+  },
+  getters: {
+    info: s => s.info
   },
   modules: {
     students, lessons

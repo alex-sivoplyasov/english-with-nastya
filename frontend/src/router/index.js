@@ -1,11 +1,14 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-console.log('test')
+
 
 const routes = [
   {
     path: '/',
     name: 'Home',
+    meta: {
+      title: 'Главная'
+    },
     component: Home
   },
   {
@@ -13,7 +16,8 @@ const routes = [
     name: 'Students',
     meta: {
       layout: 'main',
-      auth: true
+      auth: true,
+      title: 'Список студентов'
     },
     component: () => import( '../views/Students.vue')
   },
@@ -22,7 +26,8 @@ const routes = [
     name: 'Statistic',
     meta: {
       layout: 'main',
-      auth: true
+      auth: true,
+      title: 'Статистика'
     },
     component: () => import( '../views/Statistic.vue')
   },
@@ -31,7 +36,8 @@ const routes = [
     name: 'Student',
     meta: {
       layout: 'main',
-      auth: true
+      auth: true,
+      title: 'Просмотр студента'
     },
     component: () => import( '../components/Student.vue')
   },
@@ -40,7 +46,8 @@ const routes = [
     name: 'CreateStudent',
     meta: {
       layout: 'main',
-      auth: true
+      auth: true,
+      title: 'Добавить студента'
     },
     component: () => import( '../components/StudentsCreate.vue')
   },
@@ -58,7 +65,8 @@ const routes = [
     name: 'Lessons',
     meta: {
       layout: 'main',
-      auth: true
+      auth: true,
+      title: 'Список уроков'
     },
     component: () => import( '../views/Lessons.vue')
   },
@@ -67,7 +75,8 @@ const routes = [
     name: 'CreateLesson',
     meta: {
       layout: 'main',
-      auth: true
+      auth: true,
+      title: 'Создать урок'
     },
     component: () => import( '../components/LessonsCreate.vue')
   }
@@ -80,6 +89,8 @@ const router = createRouter({
 
 
 router.beforeEach( (to, from, next) => {
+  // this.$store.dispatch('setTitle', to.meta.title)
+  // console.log('this.$store', this.$store)
   next()
 })
 

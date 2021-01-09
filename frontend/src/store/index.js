@@ -4,7 +4,7 @@ import lessons from "./lessons";
 import axios from "axios"
 import {server} from "../../utils/constants";
 
-export default createStore({
+const store = createStore({
   state: {
     info: null,
     error: null
@@ -40,3 +40,5 @@ export default createStore({
     students, lessons
   }
 })
+
+export default store

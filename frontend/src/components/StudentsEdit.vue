@@ -23,13 +23,13 @@ export default {
     class: null,
     file: null,
   }),
-  mounted() {
-    console.log(this.$route)
-    // this.student = this.$store.dispatch('getStudent')
-  },
+  // mounted() {
+  //   console.log(this.$route)
+  //   // this.student = this.$store.dispatch('getStudent')
+  // },
   methods: {
     submitForm() {
-      console.log('fff')
+      // console.log('fff')
     }
   }
 }

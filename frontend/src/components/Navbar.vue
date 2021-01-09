@@ -1,11 +1,15 @@
 <template>
   <nav class="nav">
     <div class="nav__top">
-      <div class="nav__logo"/>
-      <div class="nav__logo-text">Nastya App</div>
-      <div class="nav__burger">
-        burger
-      </div>
+
+      <router-link  to="/" class="nav__logo">
+        <div class="nav__icon">N</div>
+        <div class="nav__logo-text">NastyaApp</div>
+      </router-link>
+<!--      -->
+<!--      <div class="nav__burger">-->
+<!--        burger-->
+<!--      </div>-->
     </div>
 
     <div class="nav__list">
@@ -38,11 +42,24 @@ export default {
   }
 
   &__logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 40px;
     height: 40px;
     margin-right: 8px;
     background-color: #6FC51E;
     border-radius: 50px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #FFFFFF;
   }
 
   &__logo-text {

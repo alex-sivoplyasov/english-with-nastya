@@ -31,7 +31,6 @@
         this.students = await this.$store.dispatch('getStudents')
         if (this.students) {
           this.student = this.students[0]._id
-          console.log(this.students)
           this.price = this.students[0].rate
         }
 

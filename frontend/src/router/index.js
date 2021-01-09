@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-
+import store from "../store";
 
 const routes = [
   {
@@ -51,15 +51,16 @@ const routes = [
     },
     component: () => import( '../components/StudentsCreate.vue')
   },
-  // {
-  //   path: '/create-student',
-  //   name: 'CreateStudent',
-  //   meta: {
-  //     layout: 'main',
-  //     auth: true
-  //   },
-  //   component: () => import( '../components/StudentsCreate.vue')
-  // },
+  {
+    path: '/edit-student/:id',
+    name: 'EditStudent',
+    meta: {
+      layout: 'main',
+      auth: true,
+      title: 'Изменить студента'
+    },
+    component: () => import( '../components/StudentsEdit.vue')
+  },
   {
     path: '/lessons',
     name: 'Lessons',
@@ -90,7 +91,8 @@ const router = createRouter({
 
 router.beforeEach( (to, from, next) => {
   // this.$store.dispatch('setTitle', to.meta.title)
-  // console.log('this.$store', this.$store)
+  // console.log('store router', store)
+  store.dispatch('setTitle', to.meta.title)
   next()
 })
 

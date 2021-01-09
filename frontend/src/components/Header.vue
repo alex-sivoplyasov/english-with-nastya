@@ -1,15 +1,26 @@
 <template>
   <header class="header">
-    <div class="header__title">Список студентов</div>
+    <div class="header__title" v-if="title">{{title}}</div>
   </header>
 </template>
 
 <script>
 export default {
   name: "Header",
-  mounted() {
-    console.log('info', this.$store.getters.info)
-  }
+  // data: () => ({
+  //   title: ''
+  // }),
+  computed: {
+    title() {
+      // console.log('test', this.$store.state.info.title)
+      if (this.$store.state.info)
+        return this.$store.state.info.title
+      return ''
+    }
+  },
+  // mounted() {
+  //   console.log('info', this.$store.getters.info)
+  // }
 }
 </script>
 

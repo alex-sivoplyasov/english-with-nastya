@@ -26,6 +26,10 @@ export default {
 /*@import '~normalize.css';*/
 /*@import 'normalize.css';*/
 
+body {
+  overflow: hidden;
+}
+
 #app {
   display: flex;
 }
@@ -39,6 +43,29 @@ export default {
 
 .right {
   width: 100%;
+}
+
+.button {
+  display: block;
+  width: fit-content;
+  padding: 16px 32px;
+  margin-top: 16px;
+  background: #6FC51E;
+  border-radius: 50px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  border: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #85FFA5;
+}
+
+.button:focus {
+  border: none;
+  outline: none;
 }
 
 </style>

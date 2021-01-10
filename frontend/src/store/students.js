@@ -37,6 +37,14 @@ export default {
         commit('setError', e)
         throw e
       }
+    },
+    async updateStudent({commit},student) {
+      try {
+        return (await axios.put(`${server}/students/${student._id}`, student)).data
+      } catch (e) {
+        commit('setError', e)
+        throw e
+      }
     }
   },
   getters: {

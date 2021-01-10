@@ -80,6 +80,16 @@ const routes = [
       title: 'Создать урок'
     },
     component: () => import( '../components/LessonsCreate.vue')
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    meta: {
+      layout: 'main',
+      auth: false,
+      title: 'Авторизация'
+    },
+    component: () => import( '../views/Login.vue')
   }
 ]
 

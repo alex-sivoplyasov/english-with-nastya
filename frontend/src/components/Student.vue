@@ -1,7 +1,7 @@
 <template>
 
   <div class="status-query" v-if="status">
-    Новый ученик успешно добавлен
+    {{ statusText[status]}}
   </div>
 
   <div v-if="loading">
@@ -47,7 +47,9 @@
   </div>
 
   <div class="buttons">
-    <router-link to="/edit-student" class="button edit">Изменить студента</router-link>
+    <router-link :to="`/edit-student/${student._id}`" class="button edit" v-if="student">
+      Изменить студента
+    </router-link>
     <router-link to="/students" class="button">Список студентов</router-link>
   </div>
 
@@ -60,7 +62,11 @@ export default {
   data: () => ({
     loading: true,
     student: null,
-    status: null
+    status: null,
+    statusText: {
+      'new': 'Новый студент добавлен',
+      'update': 'Студент успешно обновлён'
+    }
   }),
   async mounted() {
     this.student = await this.$store.dispatch('getStudent',this.$route.params.id)

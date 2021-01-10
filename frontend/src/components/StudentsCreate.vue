@@ -18,7 +18,7 @@
 
 <script>
   import { uploadsUrl} from "../../utils/constants"
-  // import { reactive, toRefs } from "@vue/composition-api";
+  // import { reactive, toRefs } from "@vue/composition-api"
   // import { required, minValue } from 'vuelidate/lib/validators'
 
   export default {
@@ -32,14 +32,32 @@
       classNumber: null,
       file: null,
     }),
-    // validations: {
-    //   name: {
-    //     required,
-    //   },
-    //   rate: {
-    //     required,
-    //     minValue: minValue(0)
+    // setup(){
+    //   const state = reactive({
+    //     email: "",
+    //     password: ""
+    //   });
+    //   return {
+    //     ...toRefs(state)
     //   }
+    //
+    //
+    //   const userEmail = ref("");
+    //   const userPassword = ref("");
+    //   // Validation Logics
+    //   const rules = {
+    //     userEmail: { required, email },
+    //     userPassword: { required, minLength: minLength(8) }
+    //   };
+    //   const $v = useVuelidate(
+    //       rules,
+    //       { userEmail, userPassword }
+    //   );
+    //   return {
+    //     userEmail,
+    //     userPassword,
+    //     $v
+    //   };
     // },
     methods: {
       previewFiles() {
@@ -47,40 +65,45 @@
       },
       async submitForm() {
         // this.$v.$touch()
-        // if (this.$v.$invalid) {
-        //
-        //   console.log('this.$v.name.$dirty', this.$v.age.$dirty)
-        //   console.log('this.$v.name.required', this.$v.age.required)
-        //   console.log('this.$v.name', this.$v.age)
-        //   return ''
-        // }
-        //
-        // // return ''
+        if (this.$v.$invalid) {
 
-
-        if (this.file) {
-          const formData = new FormData()
-          formData.append('image', this.file)
-          const res = await this.$store.dispatch('fileUpload', formData)
-          this.image =  uploadsUrl + res.data.data.filename
+          console.log('this.$v.name.$dirty', this.$v.age.$dirty)
+          console.log('this.$v.name.required', this.$v.age.required)
+          console.log('this.$v.name', this.$v.age)
+          return ''
         }
 
-        try {
-          const newStudent = await this.$store.dispatch('createStudent', {
-            name: this.name,
-            parentName: this.parentName,
-            rate: this.rate,
-            age: this.age,
-            image: this.image,
-            class: this.classNumber,
-            active: true
-          })
+        // return ''
 
-          this.$router.push({ path: `/students/${newStudent._id}`, query: { status: 'new' } })
-          // this.$router.push(`/students/${newStudent._id}/&status=new`)
-        } catch (e) {
-          console.log(e)
+        const t = 0
+
+        if (t > 1) {
+          if (this.file) {
+            const formData = new FormData()
+            formData.append('image', this.file)
+            const res = await this.$store.dispatch('fileUpload', formData)
+            this.image =  uploadsUrl + res.data.data.filename
+          }
+
+          try {
+            const newStudent = await this.$store.dispatch('createStudent', {
+              name: this.name,
+              parentName: this.parentName,
+              rate: this.rate,
+              age: this.age,
+              image: this.image,
+              class: this.classNumber,
+              active: true
+            })
+
+            this.$router.push({ path: `/students/${newStudent._id}`, query: { status: 'new' } })
+          } catch (e) {
+            console.log(e)
+          }
         }
+
+
+
       },
     }
   }

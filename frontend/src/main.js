@@ -4,7 +4,6 @@ import router from './router'
 import store from './store'
 // import Vuelidate from 'vuelidate'
 import {VuelidatePlugin} from '@vuelidate/core'
-import VueCompositionApi from '@vue/composition-api';
 
 // Vue.use(Vuelidate)
 
@@ -15,6 +14,13 @@ import VueCompositionApi from '@vue/composition-api';
 createApp(App)
   .use(store)
   .use(router)
-  .use(VueCompositionApi)
   .use(VuelidatePlugin)
+  // .use(VCalendar, {})
   .mount('#app')
+
+
+// const app = createApp(App)
+// app.use(store)
+// app.use(router)
+// app.use(VuelidatePlugin)
+// app.mount('#app')

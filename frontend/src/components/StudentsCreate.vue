@@ -1,11 +1,12 @@
 <template>
   <div>
     <form @submit.prevent="submitForm" >
-      <input type="text" v-model="name" placeholder="Имя">
-<!--      <div v-if="!$v.age.required">Введите имя</div>-->
+      <input type="text" v-model="name" placeholder="Имя" :class="{error: $v.name.required.$invalid}">
+      <div class="error-text" v-if="$v.name.required.$invalid">Введите имя</div>
       <input type="text" v-model="parentName" placeholder="Имя родителя">
       <input type="number" v-model="age" placeholder="Возраст">
-      <input type="number" v-model="rate" placeholder="Ставка в час">
+      <input type="number" v-model="rate" placeholder="Ставка в час" :class="{error: $v.rate.required.$invalid}">
+      <div class="error-text" v-if="$v.rate.required.$invalid">Введите ставку</div>
       <input type="number" v-model="classNumber" placeholder="Класс">
       <input type="file" name="file" @change="previewFiles" ref="file" id="file">
       <label for="file" class="button">
@@ -17,95 +18,80 @@
 </template>
 
 <script>
-  import { uploadsUrl} from "../../utils/constants"
-  // import { reactive, toRefs } from "@vue/composition-api"
-  // import { required, minValue } from 'vuelidate/lib/validators'
+  import { ref } from 'vue'
+  import { useVuelidate } from '@vuelidate/core'
+  import { required } from '@vuelidate/validators'
+  import store from "@/store";
+  import router from "@/router";
 
   export default {
     name: "StudentsCreate",
-    data: () => ({
-      name: null,
-      parentName: null,
-      rate: null,
-      image: '',
-      age: null,
-      classNumber: null,
-      file: null,
-    }),
-    // setup(){
-    //   const state = reactive({
-    //     email: "",
-    //     password: ""
-    //   });
-    //   return {
-    //     ...toRefs(state)
-    //   }
-    //
-    //
-    //   const userEmail = ref("");
-    //   const userPassword = ref("");
-    //   // Validation Logics
-    //   const rules = {
-    //     userEmail: { required, email },
-    //     userPassword: { required, minLength: minLength(8) }
-    //   };
-    //   const $v = useVuelidate(
-    //       rules,
-    //       { userEmail, userPassword }
-    //   );
-    //   return {
-    //     userEmail,
-    //     userPassword,
-    //     $v
-    //   };
-    // },
-    methods: {
-      previewFiles() {
-        this.file = this.$refs.file.files[0]
-      },
-      async submitForm() {
-        // this.$v.$touch()
-        if (this.$v.$invalid) {
 
-          console.log('this.$v.name.$dirty', this.$v.age.$dirty)
-          console.log('this.$v.name.required', this.$v.age.required)
-          console.log('this.$v.name', this.$v.age)
-          return ''
-        }
+    setup() {
+      const name = ref('')
+      const parentName = ref('')
+      const rate = ref('')
+      const image = ref('')
+      const age = ref('')
+      const classNumber = ref('')
+      const file = ref('')
 
-        // return ''
+      const rules = {
+        name: { required },
+        rate: { required }
+      }
 
-        const t = 0
+      const $v = useVuelidate(rules, {name, rate})
 
-        if (t > 1) {
-          if (this.file) {
-            const formData = new FormData()
-            formData.append('image', this.file)
-            const res = await this.$store.dispatch('fileUpload', formData)
-            this.image =  uploadsUrl + res.data.data.filename
-          }
+      const previewFiles = () => {
+        console.log('tttt', file)
+        // this.file = this.$refs.file.files[0]
+      }
 
+      async function submitForm () {
+        // if (this.file) {
+        //   const formData = new FormData()
+        //   formData.append('image', this.file)
+        //   const res = await this.$store.dispatch('fileUpload', formData)
+        //   this.image =  uploadsUrl + res.data.data.filename
+        // }
+
+
+        $v.value.$touch()
+        if (!$v.value.$error) {
           try {
-            const newStudent = await this.$store.dispatch('createStudent', {
-              name: this.name,
-              parentName: this.parentName,
-              rate: this.rate,
-              age: this.age,
-              image: this.image,
-              class: this.classNumber,
+            const data = {
+              name: name.value,
+              parentName: parentName.value,
+              rate: rate.value,
+              image: image.value,
+              age: age.value,
+              classNumber: classNumber.value,
               active: true
-            })
+            }
 
-            this.$router.push({ path: `/students/${newStudent._id}`, query: { status: 'new' } })
+            const newStudent = await store.dispatch('createStudent', data)
+            router.push({ path: `/students/${newStudent._id}`, query: { status: 'new' } })
           } catch (e) {
             console.log(e)
           }
+
         }
+      }
 
-
-
-      },
-    }
+      return {
+        name,
+        parentName,
+        rate,
+        age,
+        image,
+        classNumber,
+        $v,
+        previewFiles,
+        submitForm,
+        file
+      }
+    },
   }
 </script>
 
@@ -134,5 +120,20 @@
 
   label.button:hover {
     background: #FAF2F0;
+  }
+
+  .error-text {
+    color: #E85C4A;
+    margin-bottom: 8px;
+    font-size: 12px;
+  }
+
+  input.error {
+    background-color: #FED7D2;
+    color: #E11900;
+  }
+
+  input.error::placeholder {
+    color: #E11900;
   }
 </style>

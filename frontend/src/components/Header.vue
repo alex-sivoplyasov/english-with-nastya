@@ -5,22 +5,17 @@
 </template>
 
 <script>
+import { computed} from 'vue'
+import store from "@/store";
 export default {
+
   name: "Header",
-  // data: () => ({
-  //   title: ''
-  // }),
-  computed: {
-    title() {
-      // console.log('test', this.$store.state.info.title)
-      if (this.$store.state.info)
-        return this.$store.state.info.title
-      return ''
+  setup() {
+    const title = computed( () => store.state.info.title)
+    return {
+      title
     }
-  },
-  // mounted() {
-  //   console.log('info', this.$store.getters.info)
-  // }
+  }
 }
 </script>
 

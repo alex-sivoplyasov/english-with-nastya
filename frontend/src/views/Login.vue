@@ -1,56 +1,57 @@
 <template>
-  <form @submit.prevent="login">
-    <input type="text" v-model="userEmail" @blur="handleBlur('userEmail')">
-<!--    <ErrorMessage :validationStatus="$v.userEmail" />-->
-    <input type="password" v-model="userPassword" @blur="handleBlur('userPassword')">
-<!--    <ErrorMessage :validationStatus="$v.userPassword" />-->
-
-    <button :disabled="$v.$invalid" type="submit">Login</button>
-  </form>
+  <div>
+    <form action="" @submit.prevent="onSubmit">
+      <input type="text" v-model="emailUser" placeholder="email">
+      <div v-if="$v.emailUser.required.$invalid">Enter email</div>
+      <div v-if="$v.emailUser.email.$invalid">Need correct email</div>
+      <input type="text" v-model="name" placeholder="f">
+      <div v-if="$v.name.required.$invalid">Enter name</div>
+      <input type="text" v-model="password" placeholder="1">
+      <div v-if="$v.password.required.$invalid">Enter password</div>
+      <button type="submit">Go</button>
+    </form>
+  </div>
 </template>
 
 <script>
-import { ref } from "@vue/composition-api";
-import useVuelidate from "@vuelidate/core";
-import { required, email, minLength } from "@vuelidate/validators";
+import { ref } from 'vue'
+import { useVuelidate } from '@vuelidate/core'
+import { required, email } from '@vuelidate/validators'
 
 export default {
-  name: "Login",
-  data: () => ({
-    email: null,
-    password: null
-  }),
-  setup(){
-    const userEmail = ref("");
-    const userPassword = ref("");
+  name: "Lessons",
+  setup() {
+    const name = ref('')
+    const emailUser = ref('')
+    const password = ref('')
     const rules = {
-      userEmail: { required, email },
-      userPassword: { required, minLength: minLength(8) }
-    };
-    const $v = useVuelidate(
-        rules,
-        { userEmail, userPassword }
-    );
-    const handleBlur = (key) =>{
-      $v[key].$dirty = true;
-    };
-    const login = () => {
-      $v.$dirty = true;
-      if (!$v.$error) {
-        // DO SOMETHING
+      emailUser: {required, email},
+      name: {required},
+      password: {required}
+    }
+
+    const $v = useVuelidate(rules, {emailUser, name, password})
+
+    const onSubmit = () => {
+      $v.value.$touch()
+      if (!$v.value.$error) {
+        const formData = {
+          emailUser: emailUser.value,
+          name: name.value,
+          password: password.value
+        }
+        console.log(formData)
       }
-    };
+    }
+
     return {
-      userEmail,
-      userPassword,
+      emailUser,
+      name,
+      password,
       $v,
-      handleBlur,
-      login
-    };
+      onSubmit
+    }
   }
+
 }
 </script>
-
-<style scoped>
-
-</style>

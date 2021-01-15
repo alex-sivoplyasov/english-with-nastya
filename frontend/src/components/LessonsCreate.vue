@@ -1,7 +1,5 @@
 <template>
   <div>
-    <Test/>
-<!--    <vc-calendar></vc-calendar>-->
     <form @submit.prevent="formSubmit">
       <select v-model="student" @change="studentSelect">
         <option v-for="student in students" :key="student.id" :value="student._id"> {{student.name}}</option>

@@ -12,8 +12,15 @@
 <script>
 import Navbar from "./components/Navbar"
 import Header from "./components/Header";
+import {onMounted} from "@vue/runtime-core";
+import store from "@/store";
 export default {
   name: "App",
+  setup() {
+    onMounted( () => {
+      store.dispatch('setTitle', 'App')
+    })
+  },
   components: {
     Navbar, Header
   }

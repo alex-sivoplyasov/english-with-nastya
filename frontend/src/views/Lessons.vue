@@ -7,8 +7,13 @@
 </template>
 
 <script>
+  // import { Calendar, DatePicker } from 'v-calendar'
   export default {
-    name: "Lessons"
+    name: "Lessons",
+    // components: {
+    //   Calendar,
+    //   DatePicker,
+    // },
   }
 </script>
 

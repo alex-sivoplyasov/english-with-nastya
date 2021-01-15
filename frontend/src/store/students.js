@@ -22,7 +22,6 @@ export default {
       }
     },
     async createStudent({commit}, student) {
-      // console.log('st', student)
       try {
         return  (await axios.post(`${server}/students/`, student)).data
       } catch (e) {
